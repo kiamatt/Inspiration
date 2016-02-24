@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	  <title>MemeMaker-Simple</title>
+	    
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	  <style>
+	  	body {
+	  		background-color: #d1d1e0;
+	  	}
+
+	  	#saveButton {
+	  		display:none;
+	  	}
+	  	#canvasColumn {
+	  		opacity: 0;
+	  		width: 400px;
+	  	}
+	  	.explanation {
+	  		text-align: center;
+	  		margin: 50px;
+	  	}
+		#c {
+			margin: 10px;
+		}
+
+		@media screen and (min-width:600px) and (max-width:740px){
+			#c {
+				width:600px;
+				height:400px;
+			}
+		}
+
+		@media screen and (min-width:401px) and (max-width:599px){
+			#c {
+				width:400px;
+				height: 300px;
+			}
+		}
+
+		@media screen and (min-width:300px) and (max-width:400px){
+			#c {
+				width:300px;
+				height:250px;
+			}
+		}
+	
+	  </style>
+	</head>
+	<body>
+			<header class="row">
+			<div class="col-md-8" id="canvasColumn">
+				<canvas id="c" height="450" width="700"></canvas>
+			</div>
+			<div class="col-md-4">
+				<div class="explanation" id="explanation">
+					<h3>Welcome to Inspiration.</h3>
+					<p> Here you will find all the wisdom in the universe.</p>
+					<h3>Knowledge is life, and life is love.</h3>
+					<p>Press the button below and enjoy.</p>
+					<div class="btn-group" role="group">
+  						<button type="button" class="btn btn-default" id="button" onclick="meme()">Wisdom</button>
+  						<div class="btn-group" role"group">
+						<button type="button" class="btn btn-default" id="saveButton" onclick="saveFile()">Save These Words</button>
+						</div>
+  					</div>
+  					
+  				</div>
+
+
+		
+		<script>
+
+			var backgrounds = ['beach.jpg', 'beach2.jpg', 'beach3.jpg', 'beach4.jpg', 'beach5.jpg', 'sunrise.jpg', 'sunrise2.jpg', 'sunrise3.jpg', 'sunrise4.jpg', 'sunrise5.jpg', 'sunrise6.jpg'];
+
+			var text1 = ['The soul', 'Peace', 'Love', 'Eternity', 'World Peace', 'Magic', 'Friendship', 'Laughter', 'Imagination', 'Whimsy', 'Change'];
+
+			var text2 = ['can be', 'is', 'is like', 'can feel like', 'is an explosion of', 'is the culmination of', 'is the paradox of', 'has the heat of', 'is one thousand shades of', 'weighs more than', 'is worth more than'];
+
+			var text3 = ['eternity', 'a thousand suns', 'the sun', 'all the stars in the universe', 'the sigh of a newborn', 'all the light in the world', 'all the weight of the universe', 'the light of every candle in history', 'the great light of the world', 'the gift of existence'];
+
+			var text4 = ['Always', 'Never', 'Make sure to', 'A wise man will', 'A fool will always', 'Mankind will always', 'A mother will', 'A father should', 'A child cannot', 'Friends should'];
+
+			var text5 = ['heed', 'ignore', 'listen to', 'take heed of', 'be aware of', 'search for', 'strive to find', 'spend a life seeking', 'destroy', 'create'];
+
+			var text6 = ['that one feeling', 'the meaning behind that', 'the weight of a single word', 'the force of a thousand waterfalls', 'the hope of eternal life', 'that gentle release', 'the words of a wise man', 'the thoughts of a fool']
+
+			var meme = function() {
+
+				var image = new Image();
+
+				var random1 = text1[Math.floor(Math.random() * text1.length)];
+				var random2 = text2[Math.floor(Math.random() * text2.length)];
+				var random3 = text3[Math.floor(Math.random() * text3.length)];
+				var randomTop = random1 + ' ' + random2 + ' ' + random3 + '.'
+
+				var random4 = text4[Math.floor(Math.random() * text4.length)];
+				var random5 = text5[Math.floor(Math.random() * text5.length)];
+				var random6 = text6[Math.floor(Math.random() * text6.length)];
+				var randomBottom = random4 + ' ' + random5 + ' ' + random6 + '.'
+
+
+				var randomImage = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+
+				image.src = randomImage;
+
+				var c = document.querySelector('#c');
+
+				var ctx = c.getContext('2d');
+
+				ctx.font = '18pt Impact';
+				ctx.textAlign = 'center';
+				ctx.functionllStyle = 'white';
+				ctx.strokeStyle = 'black';
+				ctx.lineWidth = 1;
+				ctx.fillStyle = 'white';
+
+				image.onload = function() {
+					ctx.drawImage(image, 0, 0, 700, 450);
+					ctx.fillText(randomTop, c.width / 2, 40);
+	        		ctx.strokeText(randomTop, c.width / 2, 40);
+	        		ctx.fillText(randomBottom, c.width / 2, c.height - 20);
+	        		ctx.strokeText(randomBottom, c.width / 2, c.height - 20);
+	        		saveButton.style.display = "block";
+	        		canvasColumn.style.opacity = 1;
+	        		canvasColumn.style.width = '800px';
+				};
+			};
+
+			function saveFile() {
+      			window.open(document.querySelector('canvas').toDataURL());
+    		}
+			
+		</script>
+	</body>
+</html>
